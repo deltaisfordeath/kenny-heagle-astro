@@ -1,0 +1,30 @@
+---
+title: "Hello World"
+description: "An introduction to this site and what to expect."
+pubDate: 2026-04-19T12:00:00-07:00
+tags: ["meta"]
+draft: true
+---
+
+import { Image } from 'astro:assets';
+import triathlonPhoto from '../../assets/images/kenny-triathlon.jpeg';
+import {PATH_TO_PROJECTS} from '../../util/constants'
+
+Hello World! Welcome to my Blog. My name is Kenny Heagle.
+
+<Image src={triathlonPhoto} alt="Kenny at a triathlon" width={360} quality={85} />
+*Me at the 2024 Mesa Sprint Triathlon*
+
+## What to expect
+
+Posts here won't follow a rigid schedule. When something is worth writing, I'll write it. Topics will span:
+
+- **Technology** — software development, data engineering, AI, infrastructure
+- **Business & finance** — strategy, markets, accounting nuance, economics
+- **Fitness** — training, nutrition, whatever's working (or not)
+
+## Projects
+
+The <a href={PATH_TO_PROJECTS}>projects page</a> will showcase things I'm building or contributing to — including collaborations with friends.
+
+If you want to follow along, there's an [RSS feed](/rss.xml) or you can find me on the socials linked below.

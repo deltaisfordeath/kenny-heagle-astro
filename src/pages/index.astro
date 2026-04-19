@@ -1,0 +1,175 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { PATH_TO_BLOG } from "../util/constants";
+
+type Post = CollectionEntry<"posts">;
+
+const allPosts: Post[] = await getCollection(
+  "posts",
+  ({ data }: Post) => !data.draft,
+);
+const recentPosts = allPosts
+  .sort(
+    (a: Post, b: Post) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  )
+  .slice(0, 5);
+---
+
+<BaseLayout
+  title="Kenny Heagle"
+  description="Writing on tech, business, finance, and fitness."
+>
+  <div class="container">
+    <section class="hero">
+      <div class="hero__text">
+        <h1 class="hero__name">Kenny Heagle</h1>
+        <p class="hero__tagline">CPA • Data Engineer • Triathlete</p>
+        <p class="hero__bio">
+          Hi, I&apos;m Kenny. I&apos;m a Data Engineer, CPA, and lifelong
+          technology enthusiast. I&apos;ve been obsessed with computers since
+          building my first PC at age 12, an early passion that eventually led
+          me to a Master&apos;s in Computer Science and a career in web
+          development and data engineering.
+        </p>
+        <p class="hero__bio">
+          My professional background is a unique blend of finance and tech. I
+          started my career in accounting with a Bachelor's degree before
+          merging that expertise with software, ultimately earning my CPA
+          license while working as a Data Engineer at an accounting firm.
+        </p>
+        <p class="hero__bio">
+          To balance out all the hours sitting at desks and staring at screens,
+          I dedicate as much of my personal time as possible to fitness, ideally
+          outdoors. To that end I enjoy pushing my limits by competing in
+          distance running and triathlons.
+        </p>
+        <p class="hero__bio">
+          On my
+          <a href={PATH_TO_BLOG}>blog</a>, I share my thoughts on all things
+          technology, business, and fitness related.
+        </p>
+        <div class="hero__links">
+          <a href="/blog" class="btn">Read the blog</a>
+          <a href="/projects" class="btn btn--ghost">Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="recent-posts">
+      <div class="section-header">
+        <h2 class="section-header__title">Recent Posts</h2>
+        <a href="/blog" class="section-header__link">All posts &rarr;</a>
+      </div>
+      {
+        recentPosts.length === 0 ? (
+          <p class="empty-state">No posts yet — check back soon.</p>
+        ) : (
+          recentPosts.map((post: Post) => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              slug={post.id}
+              tags={post.data.tags}
+            />
+          ))
+        )
+      }
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 3rem;
+  }
+
+  .hero__name {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero__tagline {
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .hero__bio {
+    color: var(--color-text-muted);
+    max-width: 620px;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+
+  .hero__links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.55rem 1.25rem;
+    background: var(--color-accent);
+    color: #0d1117;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn:hover {
+    background: var(--color-accent-hover);
+    text-decoration: none;
+    color: #0d1117;
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn--ghost:hover {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-accent);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  .section-header__link {
+    font-size: 0.85rem;
+  }
+
+  .recent-posts {
+    padding-bottom: 3rem;
+  }
+
+  .empty-state {
+    color: var(--color-text-muted);
+    padding: 2rem 0;
+  }
+</style>

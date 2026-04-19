@@ -1,0 +1,107 @@
+---
+import { PATH_TO_BLOG, PATH_TO_PROJECTS } from "../util/constants.js";
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: PATH_TO_BLOG, label: "Blog" },
+  { href: PATH_TO_PROJECTS, label: "Projects" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="site-header__logo">{`<KH />`}</a>
+    <nav class="site-header__nav" aria-label="Main navigation">
+      <ul>
+        {
+          navLinks.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class:list={[
+                  "nav-link",
+                  {
+                    "nav-link--active":
+                      currentPath === href ||
+                      (href !== "/" && currentPath.startsWith(href)),
+                  },
+                ]}
+                aria-current={currentPath === href ? "page" : undefined}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .site-header__logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border: 1px solid var(--color-text);
+    border-radius: 100px;
+    padding: 0 0.5rem;
+  }
+
+  .site-header__logo:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+    border-color: var(--color-accent);
+  }
+
+  .site-header__nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.4rem 0.75rem;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition:
+      color 0.15s,
+      background 0.15s;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    background: var(--color-surface);
+    text-decoration: none;
+  }
+
+  .nav-link--active {
+    color: var(--color-accent);
+  }
+</style>

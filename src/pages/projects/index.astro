@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+// Add your projects here. Import images from src/assets/images/ for optimization.
+// Example: import myProjectImage from '../../assets/images/my-project.png';
+const projects = [
+  // {
+  //   name: 'Project Name',
+  //   description: 'A short description of what this project is and why it matters.',
+  //   url: 'https://example.com',
+  //   // image: myProjectImage,
+  //   // imageAlt: 'Screenshot of Project Name',
+  //   tags: ['Web', 'Data'],
+  //   socialLinks: [
+  //     { platform: 'github', href: 'https://github.com/yourusername/repo' },
+  //     { platform: 'youtube', href: 'https://youtube.com/...' },
+  //   ],
+  // },
+];
+---
+
+<BaseLayout title="Projects — Kenny Heagle" description="Projects I've built or collaborate on.">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-header__title">Projects</h1>
+      <p class="page-header__desc">Things I've built, contributed to, or partner on — mine and those of friends.</p>
+    </header>
+
+    {projects.length === 0 ? (
+      <p class="empty-state">Projects coming soon.</p>
+    ) : (
+      <div class="project-grid">
+        {projects.map(project => (
+          <ProjectCard {...project} />
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding: 2.5rem 0 2rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2.5rem;
+  }
+
+  .page-header__title {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-header__desc {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .empty-state {
+    color: var(--color-text-muted);
+    padding: 3rem 0;
+  }
+</style>
