@@ -28,6 +28,8 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  /* keep anchor targets clear of the sticky header */
+  scroll-padding-top: 72px;
 }
 
 body {

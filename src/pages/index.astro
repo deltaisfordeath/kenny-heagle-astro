@@ -1,72 +1,59 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-import { PATH_TO_BLOG } from "../util/constants";
+import { Image } from "astro:assets";
+import { getPublishedPosts } from "../util/posts";
+import { PATH_TO_BLOG, PATH_TO_PROJECTS } from "../util/constants";
+import triathlonPhoto from "../assets/images/kenny-triathlon.jpeg";
 
-type Post = CollectionEntry<"posts">;
-
-const allPosts: Post[] = await getCollection(
-  "posts",
-  ({ data }: Post) => !data.draft,
-);
-const recentPosts = allPosts
-  .sort(
-    (a: Post, b: Post) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-  )
-  .slice(0, 5);
+const recentPosts = (await getPublishedPosts()).slice(0, 5);
 ---
 
-<BaseLayout
-  title="Kenny Heagle"
-  description="Writing on tech, business, finance, and fitness."
->
+<BaseLayout description="Writing on tech, business, finance, and fitness.">
   <div class="container">
     <section class="hero">
       <div class="hero__text">
         <h1 class="hero__name">Kenny Heagle</h1>
-        <p class="hero__tagline">CPA • Data Engineer • Triathlete</p>
+        <p class="hero__tagline">CPA • Developer • Triathlete</p>
         <p class="hero__bio">
-          Hi, I&apos;m Kenny. I&apos;m a Data Engineer, CPA, and lifelong
-          technology enthusiast. I&apos;ve been obsessed with computers since
-          building my first PC at age 12, an early passion that eventually led
-          me to a Master&apos;s in Computer Science and a career in web
-          development and data engineering.
+          Hi, I&apos;m Kenny. I teach computers to do useful things. My
+          background is an unusual blend of finance and tech: a bachelor&apos;s
+          in Accounting and years in real estate, risk analysis, and
+          underwriting, then a pivot into software — a Master&apos;s in
+          Computer Science, a CPA license, and data engineering work at an
+          accounting firm.
         </p>
         <p class="hero__bio">
-          My professional background is a unique blend of finance and tech. I
-          started my career in accounting with a Bachelor's degree before
-          merging that expertise with software, ultimately earning my CPA
-          license while working as a Data Engineer at an accounting firm.
-        </p>
-        <p class="hero__bio">
-          To balance out all the hours sitting at desks and staring at screens,
-          I dedicate as much of my personal time as possible to fitness, ideally
-          outdoors. To that end I enjoy pushing my limits by competing in
-          distance running and triathlons.
-        </p>
-        <p class="hero__bio">
-          On my
-          <a href={PATH_TO_BLOG}>blog</a>, I share my thoughts on all things
-          technology, business, and fitness related.
+          To balance the desk hours I spend as much time as I can outdoors,
+          competing in distance running and triathlons. On the
+          <a href={PATH_TO_BLOG}>blog</a> I write about technology, business,
+          and fitness.
         </p>
         <div class="hero__links">
-          <a href="/blog" class="btn">Read the blog</a>
-          <a href="/projects" class="btn btn--ghost">Projects</a>
+          <a href={PATH_TO_BLOG} class="btn">Read the blog</a>
+          <a href={PATH_TO_PROJECTS} class="btn btn--ghost">Projects</a>
         </div>
+      </div>
+      <div class="hero__photo">
+        <Image
+          src={triathlonPhoto}
+          alt="Kenny giving a thumbs up mid-race at a triathlon"
+          width={340}
+          quality={85}
+        />
       </div>
     </section>
 
     <section class="recent-posts">
       <div class="section-header">
         <h2 class="section-header__title">Recent Posts</h2>
-        <a href="/blog" class="section-header__link">All posts &rarr;</a>
+        <a href={PATH_TO_BLOG} class="section-header__link">All posts &rarr;</a>
       </div>
       {
         recentPosts.length === 0 ? (
           <p class="empty-state">No posts yet — check back soon.</p>
         ) : (
-          recentPosts.map((post: Post) => (
+          recentPosts.map((post) => (
             <PostCard
               title={post.data.title}
               description={post.data.description}
@@ -83,9 +70,27 @@ const recentPosts = allPosts
 
 <style>
   .hero {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
     padding: 4rem 0 3rem;
     border-bottom: 1px solid var(--color-border);
     margin-bottom: 3rem;
+  }
+
+  .hero__text {
+    flex: 1;
+  }
+
+  .hero__photo {
+    flex-shrink: 0;
+  }
+
+  .hero__photo img {
+    border-radius: 16px;
+    border: 1px solid var(--color-border);
+    width: 300px;
+    height: auto;
   }
 
   .hero__name {
@@ -105,7 +110,7 @@ const recentPosts = allPosts
   .hero__bio {
     color: var(--color-text-muted);
     max-width: 620px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     line-height: 1.8;
   }
 
@@ -113,6 +118,19 @@ const recentPosts = allPosts
     display: flex;
     gap: 0.75rem;
     flex-wrap: wrap;
+    margin-top: 1.75rem;
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      flex-direction: column-reverse;
+      gap: 2rem;
+      padding-top: 2.5rem;
+    }
+
+    .hero__photo img {
+      width: 220px;
+    }
   }
 
   .btn {

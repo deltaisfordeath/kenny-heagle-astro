@@ -2,25 +2,30 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 
-// Add your projects here. Import images from src/assets/images/ for optimization.
+// Add projects here. Import images from src/assets/images/ for optimization.
 // Example: import myProjectImage from '../../assets/images/my-project.png';
 const projects = [
-  // {
-  //   name: 'Project Name',
-  //   description: 'A short description of what this project is and why it matters.',
-  //   url: 'https://example.com',
-  //   // image: myProjectImage,
-  //   // imageAlt: 'Screenshot of Project Name',
-  //   tags: ['Web', 'Data'],
-  //   socialLinks: [
-  //     { platform: 'github', href: 'https://github.com/yourusername/repo' },
-  //     { platform: 'youtube', href: 'https://youtube.com/...' },
-  //   ],
-  // },
+  {
+    name: 'Hardcore Accountability',
+    description:
+      'A personal productivity tracker that keeps score across the whole picture: fitness and nutrition, productive vs. unproductive time, tasks and to-dos, and mood and mental health.',
+    url: 'https://hardcoreaccountability.com',
+    tags: ['Web App', 'Productivity', 'Fitness'],
+  },
+  {
+    name: 'Kardio Karaoke',
+    description:
+      'A YouTube channel where participants run on treadmills and try to sing karaoke despite running out of breath. Exactly as hard as it sounds.',
+    url: 'https://www.kardiokaraoke.com',
+    tags: ['YouTube', 'Fitness', 'Comedy'],
+    socialLinks: [
+      { platform: 'youtube', href: 'https://youtube.com/@kardiokaraoke' },
+    ],
+  },
 ];
 ---
 
-<BaseLayout title="Projects — Kenny Heagle" description="Projects I've built or collaborate on.">
+<BaseLayout title="Projects" description="Projects I've built or collaborate on.">
   <div class="container">
     <header class="page-header">
       <h1 class="page-header__title">Projects</h1>

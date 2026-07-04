@@ -1,9 +1,8 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '../util/posts';
 
 export async function GET(context) {
-  const posts = await getCollection('posts', ({ data }) => !data.draft);
-  const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const sorted = await getPublishedPosts();
 
   return rss({
     title: 'Kenny Heagle',

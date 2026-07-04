@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found" description="This page doesn't exist.">
+  <div class="container">
+    <section class="notfound">
+      <p class="notfound__code">404</p>
+      <h1 class="notfound__title">Page not found</h1>
+      <p class="notfound__desc">
+        The page you're looking for doesn't exist or has moved.
+      </p>
+      <div class="notfound__links">
+        <a href="/" class="btn">Back home</a>
+        <a href="/blog" class="btn btn--ghost">Read the blog</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .notfound__code {
+    font-family: var(--font-mono);
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .notfound__title {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .notfound__desc {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .notfound__links {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.55rem 1.25rem;
+    background: var(--color-accent);
+    color: #0d1117;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn:hover {
+    background: var(--color-accent-hover);
+    text-decoration: none;
+    color: #0d1117;
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn--ghost:hover {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-accent);
+  }
+</style>
