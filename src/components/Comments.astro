@@ -11,7 +11,7 @@ const SITE_ID = "kennyheagle";
 </section>
 
 <script is:inline define:vars={{ REMARK_HOST, SITE_ID }}>
-  var remark_config = {
+  window.remark_config = {
     host: REMARK_HOST,
     site_id: SITE_ID,
     components: ["embed"],
@@ -23,11 +23,11 @@ const SITE_ID = "kennyheagle";
     for (var i = 0; i < components.length; i++) {
       var s = d.createElement("script");
       s.type = "module";
-      s.src = remark_config.host + "/web/" + components[i] + ".mjs";
+      s.src = window.remark_config.host + "/web/" + components[i] + ".mjs";
       s.defer = true;
       (d.head || d.body).appendChild(s);
     }
-  })(remark_config.components || ["embed"], document);
+  })(window.remark_config.components || ["embed"], document);
 </script>
 
 <style>
