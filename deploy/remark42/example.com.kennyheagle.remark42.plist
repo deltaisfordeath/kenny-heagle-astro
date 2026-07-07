@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.kennyheagle.remark42</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/heagle/remark42/remark42</string>
+    <string>server</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/heagle/remark42</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>REMARK_URL</key>
+    <string>https://comments.kennyheagle.com</string>
+    <key>SECRET</key>
+    <string>CHANGE_ME_openssl_rand_hex_32</string>
+    <key>SITE</key>
+    <string>kennyheagle</string>
+    <key>AUTH_ANON</key>
+    <string>true</string>
+    <key>STORE_BOLT_PATH</key>
+    <string>/Users/heagle/remark42/var</string>
+    <key>BACKUP_PATH</key>
+    <string>/Users/heagle/remark42/var/backup</string>
+    <key>AVATAR_FS_PATH</key>
+    <string>/Users/heagle/remark42/var/avatars</string>
+    <!-- Admin access (fill in after first login — see README step 6):
+    <key>ADMIN_SHARED_ID</key>
+    <string>github_XXXXXXXX</string>
+    -->
+
+    <key>AUTH_GITHUB_CID</key>
+    <string>your_github_oauth_client_id</string>
+    <key>AUTH_GITHUB_CSEC</key>
+    <string>your_github_oauth_client_secret</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>/Users/heagle/remark42/logs/remark42.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/heagle/remark42/logs/remark42.err.log</string>
+</dict>
+</plist>
